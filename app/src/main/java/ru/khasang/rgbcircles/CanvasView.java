@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.AttributeSet;
 import android.view.Display;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import androidx.annotation.Nullable;
@@ -65,5 +66,23 @@ public class CanvasView extends View implements iCanvasView {
     @Override
     public void drawCircle(MainCircle circle) {
         canvas.drawCircle(circle.getX(),circle.getY(), circle.getRadius(), paint);
+    }
+
+    //метод, чтобы пальцем перемещать кружочек
+    //переопределим метод onTouchEvent
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //метод будет вызван когда прикасаемся пальцем к экрану
+        //получаем координаты касания
+       int x = (int) event.getX();
+       int y = (int) event.getY();
+
+       //если палец по экрану двигается, то вызовем метод onTouchEvent
+        if (event.getAction() == MotionEvent.ACTION_MOVE) {
+            gameManager.onTouchEvent(x, y);
+        }
+        //вызываем метод для перересовки
+        invalidate();
+        return true;
     }
 }

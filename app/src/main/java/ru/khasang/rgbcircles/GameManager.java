@@ -22,6 +22,14 @@ public class GameManager {
 
     }
 
+    public static int getWidht() {
+        return width;
+    }
+
+    public static int getHeight() {
+        return height;
+    }
+
     private void initMainCircle() {
         mainCircle = new MainCircle(width / 2,height / 2);
     }
@@ -30,5 +38,10 @@ public class GameManager {
     //круг и кто инт. реализ. его и нарисует
     public void onDraw(Canvas canvas) {
         canvasView.drawCircle(mainCircle);
+    }
+
+    //действие когда прикоснулись к экрану - передвинуть главный круг
+    public void onTouchEvent(int x, int y) {
+        mainCircle.moveMainCircleWhenTouchAt(x, y);
     }
 }
