@@ -64,7 +64,7 @@ public class CanvasView extends View implements iCanvasView {
 
     //помощью circle будем рисовать основной круг, еду, врагов
     @Override
-    public void drawCircle(MainCircle circle) {
+    public void drawCircle(SimleCircle circle) {
         canvas.drawCircle(circle.getX(),circle.getY(), circle.getRadius(), paint);
     }
 
