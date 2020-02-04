@@ -11,11 +11,14 @@ import android.view.View;
 import android.view.WindowManager;
 import androidx.annotation.Nullable;
 
-public class CanvasView extends View {
+public class CanvasView extends View implements iCanvasView {
     //ширина и высота экрана
     private static int width;
     private static int height;
     private GameManager gameManager;
+    private Paint paint;
+    private Canvas canvas;
+
 
     //конструктор CanvasView
     public CanvasView(Context context, @Nullable AttributeSet attrs) {
@@ -25,8 +28,17 @@ public class CanvasView extends View {
 
         //выделяем память, проинициализировав
         //передаем ссылку на себя this (CanvasView)
+        initPaint();
         gameManager = new GameManager(this, width, height);
 
+    }
+
+    //инициализирует кисточку для рисования
+    private void initPaint() {
+        paint = new Paint();
+        paint.setAntiAlias(true);
+        //разглаживание
+        paint.setStyle(Paint.Style.FILL);
     }
 
     private void initWidthAndHeight(Context context) {
@@ -44,6 +56,14 @@ public class CanvasView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        //чтобы нарисовать надо сохранить ссылку на canvas, пч он не доступен из drawCircle
+        this.canvas = canvas;
         gameManager.onDraw(canvas);
+    }
+
+    //помощью circle будем рисовать основной круг, еду, врагов
+    @Override
+    public void drawCircle(MainCircle circle) {
+        canvas.drawCircle(circle.getX(),circle.getY(), circle.getRadius(), paint);
     }
 }

@@ -9,7 +9,6 @@ public class GameManager {
     private CanvasView canvasView;
     private static int width;
     private static int height;
-    private Paint paint;
 
     //конструктор с полями
     public GameManager(CanvasView canvasView, int w, int h) {
@@ -20,24 +19,16 @@ public class GameManager {
         height = h;
 
         initMainCircle();
-        initPaint();
 
-    }
-
-    //инициализирует кисточку для рисования
-    private void initPaint() {
-        paint = new Paint();
-        paint.setAntiAlias(true);
-        //разглаживание
-        paint.setStyle(Paint.Style.FILL);
     }
 
     private void initMainCircle() {
         mainCircle = new MainCircle(width / 2,height / 2);
     }
 
+    //когда данному кл. потребуется нарисовать круг он обратиться через интерфейс передаст
+    //круг и кто инт. реализ. его и нарисует
     public void onDraw(Canvas canvas) {
-        canvas.drawCircle(mainCircle.getX(),mainCircle.getY(), mainCircle.getRadius(), paint);
-
+        canvasView.drawCircle(mainCircle);
     }
 }
