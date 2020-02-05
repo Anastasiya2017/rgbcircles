@@ -34,4 +34,13 @@ public class SimleCircle {
     public void setColor(int color) {
         this.color = color;
     }
+
+    public SimleCircle getCircleArea() {
+        return new SimleCircle(x, y, radius * 3);
+    }
+
+    //метод узнать пересекается ли круг с другим кругом
+    public boolean isIntersect(SimleCircle circle) {
+        return radius + circle.radius >= Math.sqrt(Math.pow(x - circle.x, 2) + Math.sqrt(Math.pow(y - circle.y, 2)));
+    }
 }

@@ -29,15 +29,28 @@ public class GameManager {
 
     //метод для создания кругов врагов
     private void initEnemyCircle() {
+        //область вокруг нашего круга
+        SimleCircle mainCircleArea = mainCircle.getCircleArea();
         //выделим память под коллекцию
         circles = new ArrayList<EnemyCircle>();
         for (int i = 0; i < MAX_CIRCLES; i++) {
             //создаем временный круг
             EnemyCircle circle;
-            //проинициализируем circle
-            circle = EnemyCircle.getRandomCircle();
+
+            //пока круги пересекаются создаем ещё круг
+            do {
+                //проинициализируем circle
+                circle = EnemyCircle.getRandomCircle();
+            } while (circle.isIntersect(mainCircleArea));
             //добавляем его в коллекцию
             circles.add(circle);
+        }
+        calculateAndSetCirclesColor();
+    }
+
+    private void calculateAndSetCirclesColor() {
+        for (EnemyCircle circle : circles) {
+            circle.setEnemyOrFoodColorDependsOn(mainCircle);
         }
     }
 
@@ -56,8 +69,8 @@ public class GameManager {
     //когда данному кл. потребуется нарисовать круг он обратиться через интерфейс передаст
     //круг и кто инт. реализ. его и нарисует
     public void onDraw(Canvas canvas) {
-        canvasView.drawCircle(mainCircle);
         //то есть когда отображается гл.круг, то циклом выводим вражеские круги
+        canvasView.drawCircle(mainCircle);
         for (EnemyCircle circle : circles) {
             canvasView.drawCircle(circle);
         }

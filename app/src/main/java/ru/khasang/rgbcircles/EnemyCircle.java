@@ -12,6 +12,7 @@ public class EnemyCircle extends SimleCircle {
     public static final int FROM_RADIUS = 10;
     public static final int TO_RADIUS = 110;
     public static final int ENEMY_COLOR = Color.RED;
+    public static final int FOOD_COLOR = Color.rgb(0, 200, 0);
 
     public EnemyCircle(int x, int y, int radius) {
         super(x, y, radius);
@@ -24,8 +25,6 @@ public class EnemyCircle extends SimleCircle {
         int y = random.nextInt(GameManager.getHeight());
         int radius = FROM_RADIUS + random.nextInt(TO_RADIUS - FROM_RADIUS);
         EnemyCircle enemyCircle = new EnemyCircle(x,y,radius);
-        enemyCircle.setColor(EnemyCircle.ENEMY_COLOR);
-
         return enemyCircle;
     }
 
@@ -37,5 +36,22 @@ public class EnemyCircle extends SimleCircle {
         int dy = (y - y1) * MAIN_SPEED / GameManager.getHeight();
         x -= dx;
         y -= dy;
+    }
+
+    public void setEnemyOrFoodColorDependsOn(MainCircle mainCircle) {
+        if (isSmallerThan(mainCircle)) {
+            setColor(FOOD_COLOR);
+        }
+        else {
+            setColor(ENEMY_COLOR);
+        }
+    }
+
+    //метод сравнивает круги между собой
+    private boolean isSmallerThan(SimleCircle circle) {
+        if (radius < circle.radius) {
+            return true;
+        }
+        return false;
     }
 }
