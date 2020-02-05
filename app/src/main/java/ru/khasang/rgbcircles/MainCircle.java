@@ -25,4 +25,8 @@ public class MainCircle extends SimleCircle {
         x -= dx;
         y -= dy;
     }
+
+    public void initRadius() {
+        radius = INIT_RADIUS;
+    }
 }

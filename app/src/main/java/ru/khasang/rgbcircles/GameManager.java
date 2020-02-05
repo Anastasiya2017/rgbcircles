@@ -79,7 +79,24 @@ public class GameManager {
     //действие когда прикоснулись к экрану - передвинуть главный круг
     public void onTouchEvent(int x, int y) {
         mainCircle.moveMainCircleWhenTouchAt(x, y);
+        checkCollision();
         moveCircles();
+    }
+
+    //метод проверки пересечения
+    private void checkCollision() {
+        for (EnemyCircle circle : circles) {
+            if (mainCircle.isIntersect(circle)) {
+                gameEnd();
+            }
+        }
+    }
+
+    private void gameEnd() {
+        mainCircle.initRadius();//возварщаем радиус в исходное состояние
+        initEnemyCircle(); //переинициализируем вражеские круги
+        canvasView.redraw();//перерисовка canvasView
+
     }
 
     private void moveCircles() {

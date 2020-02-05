@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class EnemyCircle extends SimleCircle {
 
-    public static final int MAIN_SPEED = 35;
+    public static final int MAIN_SPEED = 30;
     public static final int FROM_RADIUS = 10;
     public static final int TO_RADIUS = 110;
     public static final int ENEMY_COLOR = Color.RED;
@@ -29,8 +29,8 @@ public class EnemyCircle extends SimleCircle {
         //выделим память для random
         int x = random.nextInt(GameManager.getWidht());
         int y = random.nextInt(GameManager.getHeight());
-        int dx = random.nextInt(RANDOM_SPEED) - random.nextInt(RANDOM_SPEED);
-        int dy = random.nextInt(RANDOM_SPEED) - random.nextInt(RANDOM_SPEED);
+        int dx = 1 + /*random.nextInt(RANDOM_SPEED) - */random.nextInt(RANDOM_SPEED);
+        int dy = 1 + /*random.nextInt(RANDOM_SPEED) - */random.nextInt(RANDOM_SPEED);
         int radius = FROM_RADIUS + random.nextInt(TO_RADIUS - FROM_RADIUS);
         EnemyCircle enemyCircle = new EnemyCircle(x,y,radius, dx, dy);
         return enemyCircle;
@@ -67,5 +67,17 @@ public class EnemyCircle extends SimleCircle {
     public void moveOneStep() {
         x += dx;
         y += dy;
+        checkBounds();
+    }
+
+    //проверка границ экрана для кругов
+    private void checkBounds() {
+        if (x > GameManager.getWidht() || x < 0) {
+            dx = -dx;
+        }
+        if (y > GameManager.getHeight() || y < 0) {
+            dy = -dy;
+        }
+
     }
 }

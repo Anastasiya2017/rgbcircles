@@ -7,4 +7,5 @@ public interface iCanvasView {
     //метод для рисования
     void drawCircle(SimleCircle circle);
 
+    void redraw();
 }

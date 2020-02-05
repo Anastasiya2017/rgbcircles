@@ -69,6 +69,12 @@ public class CanvasView extends View implements iCanvasView {
         canvas.drawCircle(circle.getX(),circle.getY(), circle.getRadius(), paint);
     }
 
+    //перерисовка вьюшки
+    @Override
+    public void redraw() {
+        invalidate();
+    }
+
     //метод, чтобы пальцем перемещать кружочек
     //переопределим метод onTouchEvent
     @Override
