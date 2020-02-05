@@ -13,9 +13,15 @@ public class EnemyCircle extends SimleCircle {
     public static final int TO_RADIUS = 110;
     public static final int ENEMY_COLOR = Color.RED;
     public static final int FOOD_COLOR = Color.rgb(0, 200, 0);
+    public static final int RANDOM_SPEED = 10;
+    private int dx;
+    private int dy;
 
-    public EnemyCircle(int x, int y, int radius) {
+    //конструктор вражеских кругов
+    public EnemyCircle(int x, int y, int radius, int dx, int dy) {
         super(x, y, radius);
+        this.dx = dx;
+        this.dy = dy;
     }
 
     public static EnemyCircle getRandomCircle() {
@@ -23,8 +29,10 @@ public class EnemyCircle extends SimleCircle {
         //выделим память для random
         int x = random.nextInt(GameManager.getWidht());
         int y = random.nextInt(GameManager.getHeight());
+        int dx = random.nextInt(RANDOM_SPEED) - random.nextInt(RANDOM_SPEED);
+        int dy = random.nextInt(RANDOM_SPEED) - random.nextInt(RANDOM_SPEED);
         int radius = FROM_RADIUS + random.nextInt(TO_RADIUS - FROM_RADIUS);
-        EnemyCircle enemyCircle = new EnemyCircle(x,y,radius);
+        EnemyCircle enemyCircle = new EnemyCircle(x,y,radius, dx, dy);
         return enemyCircle;
     }
 
@@ -53,5 +61,11 @@ public class EnemyCircle extends SimleCircle {
             return true;
         }
         return false;
+    }
+
+    //метод передвижения круга на один шаг
+    public void moveOneStep() {
+        x += dx;
+        y += dy;
     }
 }

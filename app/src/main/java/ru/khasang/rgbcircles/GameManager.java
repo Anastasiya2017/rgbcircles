@@ -79,5 +79,12 @@ public class GameManager {
     //действие когда прикоснулись к экрану - передвинуть главный круг
     public void onTouchEvent(int x, int y) {
         mainCircle.moveMainCircleWhenTouchAt(x, y);
+        moveCircles();
+    }
+
+    private void moveCircles() {
+        for (EnemyCircle circle : circles) {
+            circle.moveOneStep();
+        }
     }
 }
