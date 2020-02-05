@@ -5,6 +5,8 @@ public class SimleCircle {
     protected int x;
     protected int y;
     protected int radius;
+    //храним цвет круга
+    private int color;
 
     //конструктор
     public SimleCircle(int x, int y, int radius) {
@@ -23,5 +25,13 @@ public class SimleCircle {
 
     public int getRadius() {
         return radius;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 }
