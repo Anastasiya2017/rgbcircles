@@ -72,7 +72,7 @@ public class CanvasView extends View implements iCanvasView {
     //перерисовка вьюшки
     @Override
     public void redraw() {
-        invalidate();
+
     }
 
     //метод, чтобы пальцем перемещать кружочек

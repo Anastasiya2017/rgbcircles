@@ -32,7 +32,7 @@ public class EnemyCircle extends SimleCircle {
         int dx = 1 + /*random.nextInt(RANDOM_SPEED) - */random.nextInt(RANDOM_SPEED);
         int dy = 1 + /*random.nextInt(RANDOM_SPEED) - */random.nextInt(RANDOM_SPEED);
         int radius = FROM_RADIUS + random.nextInt(TO_RADIUS - FROM_RADIUS);
-        EnemyCircle enemyCircle = new EnemyCircle(x,y,radius, dx, dy);
+        EnemyCircle enemyCircle = new EnemyCircle(x, y, radius, dx, dy);
         return enemyCircle;
     }
 
@@ -56,7 +56,7 @@ public class EnemyCircle extends SimleCircle {
     }
 
     //метод сравнивает круги между собой
-    private boolean isSmallerThan(SimleCircle circle) {
+    public boolean isSmallerThan(SimleCircle circle) {
         if (radius < circle.radius) {
             return true;
         }

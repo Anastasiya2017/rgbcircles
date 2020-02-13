@@ -19,7 +19,7 @@ public class GameManager {
     public GameManager(CanvasView canvasView, int w, int h) {
         //присваиваем значения
         //this - так как одинаковые названия у переменных
-        this.canvasView =canvasView;
+        this.canvasView = canvasView;
         width = w;
         height = h;
         //инициализируем
@@ -63,7 +63,7 @@ public class GameManager {
     }
 
     private void initMainCircle() {
-        mainCircle = new MainCircle(width / 2,height / 2);
+        mainCircle = new MainCircle(width / 2, height / 2);
     }
 
     //когда данному кл. потребуется нарисовать круг он обратиться через интерфейс передаст
@@ -85,10 +85,31 @@ public class GameManager {
 
     //метод проверки пересечения
     private void checkCollision() {
+        SimleCircle circleForDel = null;
         for (EnemyCircle circle : circles) {
             if (mainCircle.isIntersect(circle)) {
-                gameEnd();
+                //если размеры круга меньше
+                if (circle.isSmallerThan(mainCircle)) {
+                    //меняем размер нашего круга
+                    mainCircle.growRadius(circle);
+
+                    circleForDel = circle;
+                    calculateAndSetCirclesColor();
+                    break;
+                } else {
+                    //переоценка всех цветов
+                    gameEnd();
+                    return;
+                }
             }
+        }
+        //удаляем лишний круг
+        if (circleForDel != null) {
+            circles.remove(circleForDel);
+        }
+        //проверяем, если кругов нет - то заканчиваем
+        if (circles.isEmpty()) {
+
         }
     }
 

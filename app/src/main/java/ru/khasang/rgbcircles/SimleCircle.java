@@ -41,6 +41,6 @@ public class SimleCircle {
 
     //метод узнать пересекается ли круг с другим кругом
     public boolean isIntersect(SimleCircle circle) {
-        return radius + circle.radius >= Math.sqrt(Math.pow(x - circle.x, 2) + Math.sqrt(Math.pow(y - circle.y, 2)));
+        return radius + circle.radius >= Math.sqrt(Math.pow(x -circle.x, 2));
     }
 }
