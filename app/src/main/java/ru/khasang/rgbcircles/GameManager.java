@@ -1,7 +1,6 @@
 package ru.khasang.rgbcircles;
 
 import android.graphics.Canvas;
-import android.graphics.Paint;
 
 import java.util.ArrayList;
 
@@ -98,7 +97,7 @@ public class GameManager {
                     break;
                 } else {
                     //переоценка всех цветов
-                    gameEnd();
+                    gameEnd("YOU LOSE!!!");
                     return;
                 }
             }
@@ -109,11 +108,12 @@ public class GameManager {
         }
         //проверяем, если кругов нет - то заканчиваем
         if (circles.isEmpty()) {
-
+            gameEnd("YOU WIN! :)");
         }
     }
 
-    private void gameEnd() {
+    private void gameEnd(String text) {
+        canvasView.showMessage(text);
         mainCircle.initRadius();//возварщаем радиус в исходное состояние
         initEnemyCircle(); //переинициализируем вражеские круги
         canvasView.redraw();//перерисовка canvasView

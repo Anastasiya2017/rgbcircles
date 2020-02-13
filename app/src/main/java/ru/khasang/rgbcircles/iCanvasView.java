@@ -8,4 +8,6 @@ public interface iCanvasView {
     void drawCircle(SimleCircle circle);
 
     void redraw();
+
+    void showMessage(String text);
 }

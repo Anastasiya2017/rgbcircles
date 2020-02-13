@@ -6,11 +6,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.AttributeSet;
-import android.view.Display;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.WindowManager;
+import android.view.*;
+import android.widget.Toast;
 import androidx.annotation.Nullable;
+import org.w3c.dom.Text;
 
 public class CanvasView extends View implements iCanvasView {
     //ширина и высота экрана
@@ -19,6 +18,7 @@ public class CanvasView extends View implements iCanvasView {
     private GameManager gameManager;
     private Paint paint;
     private Canvas canvas;
+    private Toast toast;
 
 
     //конструктор CanvasView
@@ -73,6 +73,17 @@ public class CanvasView extends View implements iCanvasView {
     @Override
     public void redraw() {
 
+    }
+
+    @Override
+    public void showMessage(String text) {
+        if (toast != null){
+            toast.cancel();
+        }
+        toast = Toast.makeText(getContext(), text, Toast.LENGTH_SHORT);
+        //centr
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 
     //метод, чтобы пальцем перемещать кружочек
